@@ -1,30 +1,56 @@
+<script>
+import NumberField from './NumberField.vue'
+
+export default {
+  data() {
+    return {
+      numberField1: 0,
+      numberField2: 0,
+      numberField3: 0,
+    }
+  },
+  computed: {
+    sum() {
+      return Number(this.numberField1) + Number(this.numberField2) + Number(this.numberField3)
+    }
+  },
+  components: {
+    NumberField
+  },
+  methods: {
+    alertSum () {
+      if(this.sum>0)
+       alert(this.sum)
+    }
+  }
+}
+</script>
+
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <NumberField v-model="numberField1" :step="1" /><br>
+  <NumberField v-model="numberField2" :step="numberField1"/><br>
+  <NumberField v-model="numberField3" :step="numberField2" /><br>
+  <button class="btn" @click="alertSum()">
+    alert sum
+  </button>
+  {{ sum }}
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-#nav {
-  padding: 30px;
+.app {
+  padding: 20px;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.btn {
+  margin-top: 15px;
+  align-self: flex-end;
+  padding: 10px 15px;
+  background: none;
+  color: teal;
+  border: 1px solid teal;
 }
 </style>
